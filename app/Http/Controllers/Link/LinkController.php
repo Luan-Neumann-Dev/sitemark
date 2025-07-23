@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Link;
 use App\Http\Requests\Link\StoreLinkRequest;
 use App\Http\Requests\Link\UpdateLinkRequest;
 use App\Models\Link;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -27,7 +28,11 @@ class LinkController
      */
     public function store(StoreLinkRequest $request): RedirectResponse
     {
-        Link::query()->create($request->validated());
+        /** @var User $user */
+        $user = auth()->user();
+
+        $user->links()
+            ->create($request->validated());
 
         return to_route('dashboard');
     }
