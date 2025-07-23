@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Link\LinkController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -22,4 +23,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/logout', LogoutController::class)->name('logout');
     Route::get('/dashboard', fn() => 'dashboard')->name('dashboard');
+
+    Route::get('/links/create', [LinkController::class, 'create'])->name('links.create');
+    Route::post('/links/create', [LinkController::class, 'store']);
 });
