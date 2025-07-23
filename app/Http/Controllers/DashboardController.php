@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\View\View;
 
 class DashboardController
@@ -12,6 +13,11 @@ class DashboardController
      */
     public function __invoke(): View
     {
-        return view('dashboard');
+        /** @var User $user */
+        $user = auth()->user();
+
+        $links = $user->links;
+
+        return view('dashboard', compact('links'));
     }
 }
