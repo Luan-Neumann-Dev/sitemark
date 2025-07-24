@@ -1,5 +1,9 @@
 <div>
-    <h1>Dashboard</h1>
+    <h1>Links</h1>
+
+    <a href="{{route('links.create')}}">Adicionar link</a>
+
+    <a href="{{route('profile')}}">Editar perfil</a>
 
     <ul>
         @foreach($links as $link)
