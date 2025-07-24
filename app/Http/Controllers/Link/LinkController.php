@@ -39,16 +39,21 @@ class LinkController
 
     /**
      * Show the form for editing the Link.
+     * @param Link $link
+     * @return View
      */
-    public function edit(Link $link)
+    public function edit(Link $link): View
     {
         return view('links.edit', compact('link'));
     }
 
     /**
      * Update the specified Link in storage.
+     * @param UpdateLinkRequest $request
+     * @param Link $link
+     * @return RedirectResponse
      */
-    public function update(UpdateLinkRequest $request, Link $link)
+    public function update(UpdateLinkRequest $request, Link $link): RedirectResponse
     {
         $link->fill($request->validated())->save();
 
@@ -57,9 +62,13 @@ class LinkController
 
     /**
      * Remove the Link from storage.
+     * @param Link $link
+     * @return RedirectResponse
      */
-    public function destroy(Link $link)
+    public function destroy(Link $link): RedirectResponse
     {
-        //
+        $link->delete();
+
+        return to_route('dashboard')->with('message', 'Link deletado com sucesso!');
     }
 }
