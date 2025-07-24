@@ -73,31 +73,13 @@ class LinkController
     }
 
     public function up(Link $link): RedirectResponse {
-        $order = $link->order;
-        $newOrder = $order - 1;
-
-        /** @var User $user */
-        $user = auth()->user();
-
-        $swapWith = $user->links()->where('order', $newOrder)->first();
-
-        $link->update(['order' => $newOrder]);
-        $swapWith->update(['order' => $order]);
+        $link->moveUp();
 
         return back();
     }
 
     public function down(Link $link): RedirectResponse {
-        $order = $link->order;
-        $newOrder = $order + 1;
-
-        /** @var User $user */
-        $user = auth()->user();
-
-        $swapWith = $user->links()->where('order', $newOrder)->first();
-
-        $link->update(['order' => $newOrder]);
-        $swapWith->update(['order' => $order]);
+        $link->moveDown();
 
         return back();
     }
