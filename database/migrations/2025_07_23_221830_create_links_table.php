@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('tag');
             $table->string('link');
+            $table->unsignedTinyInteger('order')->default(0);
             $table->string('photo')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
