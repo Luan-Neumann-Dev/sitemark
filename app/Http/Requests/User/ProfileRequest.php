@@ -3,7 +3,11 @@
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\UploadedFile;
 
+/**
+ * @property-read UploadedFile $photo
+ */
 class ProfileRequest extends FormRequest
 {
     /**
@@ -24,6 +28,7 @@ class ProfileRequest extends FormRequest
         return [
             'name' => ['required', 'min:3', 'max:30'],
             'surname' => ['min:3', 'max:30'],
+            'photo' => ['nullable', 'image'],
             'description' => ['nullable'],
         ];
     }

@@ -17,7 +17,13 @@ class ProfileController
     public function update(ProfileRequest $request) {
         $user = auth()->user();
 
-        $user->update($request->validated());
+        $data = $request->validated();
+
+        if($file = $request->file('photo')) {
+            $data['photo'] = $file->store('photos');
+        }
+
+        $user->update($data);
 
         return back()->with('message', 'Perfil atualizado com sucesso!');
     }
